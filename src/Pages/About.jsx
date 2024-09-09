@@ -1,13 +1,16 @@
-import React from 'react'
-import Title from '../components/Title'
+import React, { useEffect } from 'react';
+import Title from '../Components/Title'
 import { assets } from '../assets/assets'
-import NewsletterBox from '../components/NewsletterBox'
+import NewsletterBox from '../Components/NewsLetterBox'
 
 const About = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scrolls to the top when the component loads
+  }, []);
   return (
     <div>
 
-      <div className='text-2xl text-center pt-8 border-t'>
+      <div className='text-2xl text-center pt-8 border-t mt-8'>
         <Title text1={'ABOUT'} text2={'US'} />
       </div>
 
