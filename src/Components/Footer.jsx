@@ -10,7 +10,7 @@ const Footer = () => {
       <div className='flex flex-col sm:grid grid-cols-[3fr_1fr_1fr] gap-14 my-10 mt-40 text-sm'>
         <div>
           <img className='mb-5 w-32' src={assets.logo} alt="" />
-          <p className='w-full md:w-2/3 text-gray-600'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+          <p className='w-full md:w-2/3 text-gray-600'>At Riyas Couture, we believe that fashion is more than just clothing—it's an expression of individuality, culture, and confidence. Each piece in our collection is thoughtfully designed to bring out the beauty in every woman, offering styles that blend tradition with contemporary trends.</p>
           <div className="flex space-x-6 mt-8">
             <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" className="group">
               <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-md transition-all duration-300 group-hover:shadow-lg">
@@ -52,7 +52,7 @@ const Footer = () => {
           <p className='text-xl font-medium mb-5'>GET IN TOUCH</p>
           <ul className='flex flex-col gap-1 text-gray-600'>
             <li>+91 98439 29032</li>
-            <li>Contact@foreveryou.com</li>
+            <li>Contact@riyascouture.com</li>
           </ul>
         </div>
       </div>

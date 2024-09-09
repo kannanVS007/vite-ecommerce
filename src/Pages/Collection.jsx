@@ -151,32 +151,36 @@ const Collection = () => {
         {/* Category Filter */}
         <div className={`border border-gray-300 pl-5 py-3 mt-6 ${showFilter ? '' : 'hidden'} sm:block`}>
           <p className='mb-3 text-sm font-medium flex gap-2'><input className='w-3' value={"Men"} onChange={toggleCategory} type="checkbox" /> Men</p>
+     
+          <p className='mb-3 text-sm font-medium flex gap-2'> <input className='w-3' value={"Men"} onChange={toggleCategory} type="checkbox" />Shirts</p>
           <div className='flex flex-col gap-2 text-sm font-light text-gray-700'>
+         
             <p className='flex gap-2'><input className='w-3' value={"Men"} onChange={toggleCategory} type="checkbox" /> Printed Shirts </p>
             <p className='flex gap-2'><input className='w-3' value={"Men"} onChange={toggleCategory} type="checkbox" /> Plain Shirts </p>
             <p className='flex gap-2'><input className='w-3' value={"Men"} onChange={toggleCategory} type="checkbox" /> Casual Shirts</p>
-            <p className='flex gap-2'><input className='w-3' value={"Men"} onChange={toggleCategory} type="checkbox" />Formals Shirts</p>
+            <p className='flex gap-2'><input className='w-3' value={"Men"} onChange={toggleCategory} type="checkbox" />Formal Shirts</p>
           </div>
 
           <br />
 
-          <p className='mb-3 text-sm font-medium'>Pants</p>
+          <p className='mb-3 text-sm font-medium flex gap-2'> <input className='w-3' value={"Men"} onChange={toggleCategory} type="checkbox" />Pants</p>
           <div className='flex flex-col gap-2 text-sm font-light text-gray-700'>
             <p className='flex gap-2'><input className='w-3' value={"Men"} onChange={toggleCategory} type="checkbox" />Casual Pants </p>
             <p className='flex gap-2'><input className='w-3' value={"Women"} onChange={toggleCategory} type="checkbox" /> Formal Pants </p>
-            <p className='flex gap-2'><input className='w-3' value={"Kids"} onChange={toggleCategory} type="checkbox" /> Gens Pants</p>
+            <p className='flex gap-2'><input className='w-3' value={"Kids"} onChange={toggleCategory} type="checkbox" /> Geans Pants</p>
           </div>
         </div>
 
         <div className={`border border-gray-300 pl-5 py-3 mt-6 ${showFilter ? '' : 'hidden'} sm:block`}>
         <p className='mb-3 text-sm font-medium flex gap-2'><input className='w-3' value={"Women"} onChange={toggleCategory} type="checkbox" /> Women</p>
+        <p className='mb-3 text-sm font-medium flex gap-2'> <input className='w-3' value={"Men"} onChange={toggleCategory} type="checkbox" />Kurtas</p>
           <div className='flex flex-col gap-2 text-sm font-light text-gray-700'>
             <p className='flex gap-2'><input className='w-3' value={"Men"} onChange={toggleCategory} type="checkbox" /> Daily Wear Kurtas </p>
             <p className='flex gap-2'><input className='w-3' value={"Women"} onChange={toggleCategory} type="checkbox" /> Office Wear Kurtas </p>
             <p className='flex gap-2'><input className='w-3' value={"Kids"} onChange={toggleCategory} type="checkbox" /> Ethnic wear kurtas</p>
           </div>
           <br />
-          <p className='mb-3 text-sm font-medium'>Sarees</p>
+          <p className='mb-3 text-sm font-medium flex gap-2'> <input className='w-3' value={"Men"} onChange={toggleCategory} type="checkbox" />Sarees</p>
           <div className='flex flex-col gap-2 text-sm font-light text-gray-700'>
             <p className='flex gap-2'><input className='w-3' value={"Men"} onChange={toggleCategory} type="checkbox" /> Party Wear Sarees </p>
             <p className='flex gap-2'><input className='w-3' value={"Women"} onChange={toggleCategory} type="checkbox" /> Daily Wear Sarees </p>

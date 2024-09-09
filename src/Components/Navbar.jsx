@@ -82,7 +82,7 @@ const Navbar = () => {
                 <div className='flex flex-col h-full'>
                     <div className='flex justify-between items-center p-4 border-b'>
                         <h2 className='text-xl font-bold'>Menu</h2>
-                        <img onClick={closeMenu} className='w-5 cursor-pointer' src={assets.dropdown_icon} alt="Close Menu" />
+                        <img onClick={closeMenu} className='w-5 cursor-pointer' src={assets.cross_icon} alt="Close Menu" />
                     </div>
                     <nav className='flex flex-col flex-grow'>
                         <NavLink onClick={closeMenu} to="/" className='py-3 px-4 border-b'>Home</NavLink>

@@ -20,8 +20,7 @@ import ShippingAndDelivery from './Pages/ShippingAndDelivery';
 import RefundAndReturnPolicy from './Pages/RefundAndReturnPolicy';
 import PrivacyPolicy from './Pages/PrivacyPolicy';
 import TermsOfService from './Pages/TermsOfService';
-// import PrivacyPolicy from './Pages/PrivacyPolicy';
-// import TermsOfService from './Pages/TermsOfService';
+
 
 const MainLayout = ({ children }) => (
   <div className='px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]'>
