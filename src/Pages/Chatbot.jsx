@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { Dialog, AppBar, Toolbar, IconButton, Typography, Box, Button, TextField, useMediaQuery } from '@mui/material';
+import { Dialog, AppBar, Toolbar, IconButton, Typography, Box, Button, TextField } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import { useTheme } from '@mui/material/styles';
 
 const Chatbot = ({ onClose }) => {
     const [conversation, setConversation] = useState([
@@ -9,13 +8,10 @@ const Chatbot = ({ onClose }) => {
     ]);
     const [userInput, setUserInput] = useState('');
 
-    const theme = useTheme();
-    const isMobile = useMediaQuery(theme.breakpoints.down('sm')); // Check if the screen is small (mobile)
-
     const handleUserClick = (option) => {
         setConversation((prev) => [...prev, { sender: 'user', text: option }]);
         handleBotResponse(option);
-    };
+    }; 
 
     const handleBotResponse = (userMessage) => {
         let botResponse;
@@ -27,7 +23,7 @@ const Chatbot = ({ onClose }) => {
                 botResponse = { text: 'Please enter the product name you are looking for.', showInput: true, placeholder: 'Product Name' };
                 break;
             case 'What Are Your Return Policies?':
-                botResponse = { text: 'You can return any product within 30 days of purchase. For more details, visit our return policy page.' };
+                botResponse = { text: 'You can return any product within 15 days of purchase. For more details, visit our return policy page.' };
                 break;
             case 'Contact Support':
                 botResponse = { text: 'You can reach our support team via chat, email, or phone. How would you like to proceed?', options: ['Chat', 'Email', 'Phone'] };
@@ -52,23 +48,10 @@ const Chatbot = ({ onClose }) => {
     };
 
     return (
-        <Dialog
-            open
-            onClose={onClose}
-            fullWidth
-            maxWidth="sm"
-            PaperProps={{
-                style: {
-                    borderRadius: 10,
-                    width: isMobile ? "90%" : "30%",  // Adjust width for mobile view
-                    margin: isMobile ? "0 auto" : "60%",
-                    height: isMobile ? "90vh" : "70vh",  // Adjust height for mobile view
-                },
-            }}
-        >
+        <Dialog open onClose={onClose} fullWidth maxWidth="sm" PaperProps={{ style: { borderRadius: 10, width: "30%", marginLeft: "60%", height: "70vh" } }}>
             <AppBar position="relative" style={{ backgroundColor: '#672b2b' }}>
                 <Toolbar>
-                    <Typography variant="h6" style={{ flexGrow: 1, fontSize: isMobile ? '1.2rem' : '1.5rem' }}>
+                    <Typography variant="h6" style={{ flexGrow: 1 }}>
                         𒆜𝔽𝕆ℝ𝔼𝕍𝔼ℝ𒆜
                     </Typography>
                     <IconButton edge="end" color="inherit" onClick={onClose}>
@@ -77,23 +60,19 @@ const Chatbot = ({ onClose }) => {
                 </Toolbar>
             </AppBar>
 
-            <Box
-                display="flex"
-                flexDirection="column"
-                height={isMobile ? "70vh" : "400px"} 
-                padding={isMobile ? 1 : 2}
-                style={{ backgroundColor: '#f5f5f5', overflowY: 'auto' }}
-            >
+            <Box display="flex" flexDirection="column" height="400px" padding={2} style={{ backgroundColor: '#f5f5f5', overflowY: 'auto' }}>
                 {conversation.map((msg, index) => (
                     <Box key={index} display="flex" flexDirection="column" mb={2}>
-                        <Box display="flex" justifyContent={msg.sender === 'user' ? 'flex-end' : 'flex-start'}>
+                        <Box
+                            display="flex"
+                            justifyContent={msg.sender === 'user' ? 'flex-end' : 'flex-start'}
+                        >
                             <Box
                                 bgcolor={msg.sender === 'user' ? '#672b2b' : '#e0e0e0'}
                                 color={msg.sender === 'user' ? 'white' : 'black'}
                                 p={1}
                                 borderRadius={4}
                                 maxWidth="80%"
-                                fontSize={isMobile ? '0.9rem' : '1rem'}
                             >
                                 {msg.text}
                             </Box>
@@ -109,7 +88,6 @@ const Chatbot = ({ onClose }) => {
                                             margin: '5px 0',
                                             borderColor: '#672b2b',
                                             color: '#672b2b',
-                                            fontSize: isMobile ? '0.8rem' : '1rem',
                                         }}
                                         onClick={() => handleUserClick(option)}
                                     >
@@ -127,13 +105,10 @@ const Chatbot = ({ onClose }) => {
                                     variant="outlined"
                                     size="small"
                                     style={{ marginBottom: '10px' }}
-                                    InputProps={{
-                                        style: { fontSize: isMobile ? '0.8rem' : '1rem' },
-                                    }}
                                 />
                                 <Button
                                     variant="contained"
-                                    style={{ backgroundColor: '#672b2b', color: 'white', fontSize: isMobile ? '0.8rem' : '1rem' }}
+                                    style={{ backgroundColor: '#672b2b', color: 'white' }}
                                     onClick={handleUserInputSubmit}
                                 >
                                     Submit

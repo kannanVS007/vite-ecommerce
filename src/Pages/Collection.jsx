@@ -1,148 +1,91 @@
-import React, { useContext, useEffect, useState } from "react";
-import axios from "axios";
-import Title from "../Components/Title";
-import ProductItem from "../Components/ProductItem";
-import { ShopContext } from "../context/ShopContext";
-import { assets } from "../assets/assets";
+import React, { useContext, useEffect, useState } from 'react'
+import Title from '../Components/Title'
+import ProductItem from '../Components/ProductItem'
+import { ShopContext } from '../context/ShopContext'
+import { assets } from '../assets/assets'
 
 const Collection = () => {
+
   const { products, search, showSearch } = useContext(ShopContext);
 
   const [filterProducts, setFilterProducts] = useState([]);
   const [category, setCategory] = useState([]);
   const [subCategory, setSubCategory] = useState([]);
   const [showFilter, setShowFilter] = useState(false);
-  const [sortType, setSortType] = useState("relavent");
-  const [categoryIdMap, setCategoryIdMap] = useState({});
-  const [subCategoryIdMap, setsubCategoryIdMap] = useState({});
-
-  // Fetch categories and their IDs from the backend
-  const fetchCategoryIds = async () => {
-    try {
-      const response = await axios.get('http://localhost:4000/category/getAllCategory');
-      const categories = response.data.data;
-      const idMap = {};
-      categories.forEach(category => {
-        idMap[category.name] = category._id;
-      });
-      setCategoryIdMap(idMap);
-    } catch (error) {
-      console.error('Error fetching categories:', error);
-    }
-  };
-
-  const fetchsubCategoryIds = async () => {
-    try {
-      const response = await axios.get('http://localhost:4000/subCategory/getAllSubcategory');
-      const subCategories = response.data.data || [];
-      const idMap = {};
-      subCategories.forEach(subCategory => {
-        if (subCategory.subCategoryName && subCategory._id) {
-          idMap[subCategory.subCategoryName] = subCategory._id;
-        }
-      });
-      setsubCategoryIdMap(idMap);
-    } catch (error) {
-      console.error('Error fetching subcategories:', error);
-    }
-  };
-
-  useEffect(() => {
-    fetchCategoryIds();
-    fetchsubCategoryIds();
-  }, []);
-
-  const fetchProductsByCategory = async () => {
-    try {
-      const categoryIds = category.map(cat => categoryIdMap[cat]).filter(Boolean);
-      const categoriesQuery = categoryIds.join(",");
-      if (categoriesQuery) {
-        const response = await axios.get(`http://localhost:4000/product/getProductsByCategory?categories=${categoriesQuery}`);
-        if (response.data.status === 1) {
-          setFilterProducts(response.data.data);
-        } else {
-          setFilterProducts([]);
-        }
-      }
-    } catch (error) {
-      console.error("Error fetching products:", error);
-      setFilterProducts([]);
-    }
-  };
-
-  const fetchProductsBysubCategory = async () => {
-    try {
-      const subCategoryIds = subCategory.map(cat => subCategoryIdMap[cat]).filter(Boolean);
-      const subCategoriesQuery = subCategoryIds.join(",");
-      if (subCategoriesQuery) {
-        const response = await axios.get(`http://localhost:4000/product/getSubcategory?subCategoryIds=${subCategoriesQuery}`);
-        if (response.data.status === 1) {
-          setFilterProducts(response.data.data);
-        } else {
-          setFilterProducts([]);
-        }
-      }
-    } catch (error) {
-      console.error("Error fetching products:", error);
-      setFilterProducts([]);
-    }
-  };
+  const [sortType, setSortType] = useState('relavent')
 
   const toggleCategory = (e) => {
+
     if (category.includes(e.target.value)) {
-      setCategory(prev => prev.filter(a => a !== e.target.value));
-    } else {
-      setCategory(prev => [...prev, e.target.value]);
+      setCategory(prev => prev.filter(a => a !== e.target.value))
     }
-  };
+    else {
+      setCategory(prev => [...prev, e.target.value])
+    }
+  }
 
   const toggleSubCategory = (e) => {
+
     if (subCategory.includes(e.target.value)) {
-      setSubCategory(prev => prev.filter(a => a !== e.target.value));
-    } else {
-      setSubCategory(prev => [...prev, e.target.value]);
+      setSubCategory(prev => prev.filter(a => a !== e.target.value))
     }
-  };
+    else {
+      setSubCategory(prev => [...prev, e.target.value])
+    }
+
+  }
 
   const applyFilter = () => {
-    let productsCopy = products.slice();
-    if (showSearch && search) {
-      productsCopy = productsCopy.filter(item => item.name.toLowerCase().includes(search.toLowerCase()));
-    }
-    if (category.length > 0) {
-      fetchProductsByCategory();
-    }
-    if (subCategory.length > 0) {
-      fetchProductsBysubCategory();
-    }
-    setFilterProducts(productsCopy);
-  };
 
-  const sortProduct = () => {
+    let productsCopy = products.slice()
+
+    if (showSearch && search) {
+      productsCopy = productsCopy.filter(item => item.name.toLowerCase().includes(search.toLowerCase()))
+    }
+
+    if (category.length > 0) {
+      productsCopy = productsCopy.filter(item => category.includes(item.category));
+    }
+
+    if (subCategory.length > 0) {
+      productsCopy = productsCopy.filter(item => subCategory.includes(item.subCategory));
+    }
+
+    setFilterProducts(productsCopy)
+
+  }
+
+  const sortProduct = async () => {
+
     let fpCopy = filterProducts.slice();
+
     switch (sortType) {
-      case "low-high":
-        setFilterProducts(fpCopy.sort((a, b) => a.price - b.price));
+      case 'low-high':
+        setFilterProducts(fpCopy.sort((a, b) => (a.price - b.price)));
         break;
-      case "high-low":
-        setFilterProducts(fpCopy.sort((a, b) => b.price - a.price));
+
+      case 'high-low':
+        setFilterProducts(fpCopy.sort((a, b) => (b.price - a.price)));
         break;
+
       default:
         applyFilter();
         break;
     }
-  };
+
+  }
 
   useEffect(() => {
-    applyFilter();
-  }, [category, subCategory, search, showSearch]);
+    applyFilter()
+  }, [category, subCategory, search, showSearch])
 
   useEffect(() => {
     sortProduct();
-  }, [sortType]);
+  }, [sortType])
+
 
   return (
-    <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 border-t'>
+    <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 border-t mt-6'>
 
       {/* Filter Options */}
       <div className='min-w-60'>
@@ -150,45 +93,13 @@ const Collection = () => {
 
         {/* Category Filter */}
         <div className={`border border-gray-300 pl-5 py-3 mt-6 ${showFilter ? '' : 'hidden'} sm:block`}>
-          <p className='mb-3 text-sm font-medium flex gap-2'><input className='w-3' value={"Men"} onChange={toggleCategory} type="checkbox" /> Men</p>
-     
-          <p className='mb-3 text-sm font-medium flex gap-2'> <input className='w-3' value={"Men"} onChange={toggleCategory} type="checkbox" />Shirts</p>
+          <p className='mb-3 text-sm font-medium'>CATEGORIES</p>
           <div className='flex flex-col gap-2 text-sm font-light text-gray-700'>
-         
-            <p className='flex gap-2'><input className='w-3' value={"Men"} onChange={toggleCategory} type="checkbox" /> Printed Shirts </p>
-            <p className='flex gap-2'><input className='w-3' value={"Men"} onChange={toggleCategory} type="checkbox" /> Plain Shirts </p>
-            <p className='flex gap-2'><input className='w-3' value={"Men"} onChange={toggleCategory} type="checkbox" /> Casual Shirts</p>
-            <p className='flex gap-2'><input className='w-3' value={"Men"} onChange={toggleCategory} type="checkbox" />Formal Shirts</p>
-          </div>
-
-          <br />
-
-          <p className='mb-3 text-sm font-medium flex gap-2'> <input className='w-3' value={"Men"} onChange={toggleCategory} type="checkbox" />Pants</p>
-          <div className='flex flex-col gap-2 text-sm font-light text-gray-700'>
-            <p className='flex gap-2'><input className='w-3' value={"Men"} onChange={toggleCategory} type="checkbox" />Casual Pants </p>
-            <p className='flex gap-2'><input className='w-3' value={"Women"} onChange={toggleCategory} type="checkbox" /> Formal Pants </p>
-            <p className='flex gap-2'><input className='w-3' value={"Kids"} onChange={toggleCategory} type="checkbox" /> Geans Pants</p>
+            <p className='flex gap-2'><input className='w-3' value={"Men"} onChange={toggleCategory} type="checkbox" /> Men </p>
+            <p className='flex gap-2'><input className='w-3' value={"Women"} onChange={toggleCategory} type="checkbox" /> Women </p>
+            <p className='flex gap-2'><input className='w-3' value={"Kids"} onChange={toggleCategory} type="checkbox" /> Kids </p>
           </div>
         </div>
-
-        <div className={`border border-gray-300 pl-5 py-3 mt-6 ${showFilter ? '' : 'hidden'} sm:block`}>
-        <p className='mb-3 text-sm font-medium flex gap-2'><input className='w-3' value={"Women"} onChange={toggleCategory} type="checkbox" /> Women</p>
-        <p className='mb-3 text-sm font-medium flex gap-2'> <input className='w-3' value={"Men"} onChange={toggleCategory} type="checkbox" />Kurtas</p>
-          <div className='flex flex-col gap-2 text-sm font-light text-gray-700'>
-            <p className='flex gap-2'><input className='w-3' value={"Men"} onChange={toggleCategory} type="checkbox" /> Daily Wear Kurtas </p>
-            <p className='flex gap-2'><input className='w-3' value={"Women"} onChange={toggleCategory} type="checkbox" /> Office Wear Kurtas </p>
-            <p className='flex gap-2'><input className='w-3' value={"Kids"} onChange={toggleCategory} type="checkbox" /> Ethnic wear kurtas</p>
-          </div>
-          <br />
-          <p className='mb-3 text-sm font-medium flex gap-2'> <input className='w-3' value={"Men"} onChange={toggleCategory} type="checkbox" />Sarees</p>
-          <div className='flex flex-col gap-2 text-sm font-light text-gray-700'>
-            <p className='flex gap-2'><input className='w-3' value={"Men"} onChange={toggleCategory} type="checkbox" /> Party Wear Sarees </p>
-            <p className='flex gap-2'><input className='w-3' value={"Women"} onChange={toggleCategory} type="checkbox" /> Daily Wear Sarees </p>
-           
-          </div>
-        </div>
-
-
 
         {/* Sub Category Filter */}
         <div className={`border border-gray-300 pl-5 py-3 my-5 ${showFilter ? '' : 'hidden'} sm:block`}>
@@ -200,14 +111,12 @@ const Collection = () => {
           </div>
 
         </div>
-
-      
       </div>
 
       {/* Right Side */}
       <div className='flex-1'>
 
-        <div className='flex justify-between text-base sm:text-2xl mb-4 mt-7'>
+        <div className='flex justify-between text-base sm:text-2xl mb-4'>
           <Title text1={"ALL"} text2={"COLLECTIONS"} />
 
           {/* Product Sort */}
@@ -229,6 +138,6 @@ const Collection = () => {
       </div>
     </div>
   )
-};
+}
 
-export default Collection;
+export default Collection

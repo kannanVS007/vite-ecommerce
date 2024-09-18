@@ -10,7 +10,7 @@ const PrivacyPolicy = () => {
       <h1 className="text-3xl font-bold text-center mb-6">Privacy Policy</h1>
       
       <p className="mb-4">
-        This Privacy Policy governs the manner in which Spriknlez Boutique uses, maintains and discloses information collected from users (each, a "User") of the www.sprinklez.in website ("Site"). This privacy policy applies to the Site and all products and services offered by Spriknlez Boutique.
+        This Privacy Policy governs the manner in which Riya's Couture uses, maintains and discloses information collected from users (each, a "User") of the www.sprinklez.in website ("Site"). This privacy policy applies to the Site and all products and services offered by Riya's Couture.
       </p>
 
       <section className="mb-6">
@@ -32,7 +32,7 @@ const PrivacyPolicy = () => {
 
       <section className="mb-6">
         <h2 className="text-2xl font-semibold mb-2">How we use collected information</h2>
-        <p>Spriknlez Boutique uses Users personal information for the following purposes:</p>
+        <p>Riya's Coutureuses Users personal information for the following purposes:</p>
         <ul className="list-disc pl-5 mt-2">
           <li>To improve customer service</li>
           <li>To personalize user experience</li>
@@ -60,7 +60,7 @@ const PrivacyPolicy = () => {
       <section className="mb-6">
         <h2 className="text-2xl font-semibold mb-2">Changes to this privacy policy</h2>
         <p>
-          Spriknlez Boutique has the discretion to update this privacy policy at any time. We encourage Users to frequently check this page for any changes to stay informed about how we are helping to protect the personal information we collect.
+          Riya's Couture has the discretion to update this privacy policy at any time. We encourage Users to frequently check this page for any changes to stay informed about how we are helping to protect the personal information we collect.
         </p>
       </section>
 
@@ -74,11 +74,11 @@ const PrivacyPolicy = () => {
       <section>
         <h2 className="text-2xl font-semibold mb-2">Contacting us</h2>
         <p>
-          If you have any questions about this Privacy Policy, the practices of this site, or your dealings with this site, please contact us at: support@sprinklez.in
+          If you have any questions about this Privacy Policy, the practices of this site, or your dealings with this site, please contact us at: support@riya's couture.in
         </p>
       </section>
     </div>
-  );
+  );      
 };
 
 export default PrivacyPolicy;

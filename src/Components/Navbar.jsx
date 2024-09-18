@@ -20,10 +20,18 @@ const Navbar = () => {
     };
 
     return (
-        <div className='flex items-center justify-between py-1 font-medium bg-white fixed top-0 left-0 w-full z-50 shadow-md px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]'>
+        <div className='flex items-center justify-between py-3 font-medium bg-white fixed top-0 left-0 w-full z-50 shadow-md px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]'>
             {/* Logo */}
-            <Link to='/'><img className='w-36' src={assets.logo} alt="Logo" /></Link>
-
+            <div className="flex items-center">
+                {/* <Link to='/'>
+                    <img className='w-14 h-auto' src={assets.logo} alt="Logo" />
+                </Link> */}
+                <span
+  className="text-xl font-bold ml-2 bg-gradient-to-r from-[rgb(234,67,53)] via-[rgb(251,188,5)] to-[rgb(66,133,244)] text-transparent bg-clip-text"
+>
+  Riya's Couture.
+</span>
+            </div>
             {/* Menu Links (Desktop) */}
             <ul className='hidden sm:flex gap-5 text-sm text-gray-700'>
                 <NavLink to="/" className='flex flex-col items-center gap-1'>

@@ -7,14 +7,15 @@ import { motion } from 'framer-motion';
 
 const ChatButton = () => {
     const [open, setOpen] = useState(false);
-    const [message, setMessage] = useState('Hello, I need assistance with your services.');
+    const [message, setMessage] = useState('Hello, I would like assistance with my recent order and product inquiries.');
+
 
     const handleToggle = () => {
         setOpen(!open);
     };
 
     const handleWhatsAppMessage = () => {
-        const whatsappUrl = `https://wa.me/9843929032?text=${encodeURIComponent(message)}`;
+        const whatsappUrl = `https://wa.me/6379524135?text=${encodeURIComponent(message)}`;
         window.open(whatsappUrl, '_blank');
         setMessage(''); // Clear the input field after sending
     };
@@ -69,3 +70,4 @@ const ChatButton = () => {
 };
 
 export default ChatButton;
+0

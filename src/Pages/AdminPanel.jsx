@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, Routes, Route, Link } from 'react-router-dom';
 import { LogOut, Plus, CheckSquare, ShoppingBag, Upload, Menu } from 'lucide-react';
 
-// MenuItem Component
+// MenuItem Component (unchanged)
 const MenuItem = ({ icon, children, isActive, to, onClick }) => (
   <Link 
     to={to} 
@@ -23,14 +23,48 @@ const MenuItem = ({ icon, children, isActive, to, onClick }) => (
   </Link>
 );
 
-// Updated AddItemComponent with image upload functionality
+// Updated AddItemComponent with dynamic subcategory selection and selectable sizes
 const AddItemComponent = () => {
   const [images, setImages] = useState([]);
+  const [category, setCategory] = useState('');
+  const [subCategory, setSubCategory] = useState('');
+  const [selectedSizes, setSelectedSizes] = useState([]);
 
   const handleImageUpload = (event) => {
     const files = Array.from(event.target.files);
     const newImages = files.map(file => URL.createObjectURL(file));
     setImages(prevImages => [...prevImages, ...newImages].slice(0, 4));
+  };
+
+  const categories = {
+    Men: ['Shirts', 'Pants'],
+    Women: ['Kurtas', 'Sarees'],
+    Kids: ['Boys', 'Girls']
+  };
+
+  const subCategories = {
+    Shirts: ['Printed Shirts', 'Plain Shirts', 'Casual Shirts', 'Formal Shirts'],
+    Pants: ['Casual Pants', 'Formal Pants', 'Jeans Pants'],
+    Kurtas: ['Daily Wear Kurtas', 'Office Wear Kurtas', 'Ethnic wear kurtas'],
+    Sarees: ['Party Wear Sarees', 'Daily Wear Sarees'],
+    Boys: ['T-Shirts', 'Shorts'],
+    Girls: ['Dresses', 'Skirts']
+  };
+
+  const sizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
+
+  const handleCategoryChange = (e) => {
+    const selectedCategory = e.target.value;
+    setCategory(selectedCategory);
+    setSubCategory('');
+  };
+
+  const handleSizeToggle = (size) => {
+    setSelectedSizes(prevSizes =>
+      prevSizes.includes(size)
+        ? prevSizes.filter(s => s !== size)
+        : [...prevSizes, size]
+    );
   };
 
   return (
@@ -68,29 +102,55 @@ const AddItemComponent = () => {
       <div className="flex flex-wrap mb-4">
         <div className="w-full sm:w-1/3 mb-4 sm:mb-0 sm:pr-2">
           <label className="block mb-2">Product category</label>
-          <select className="w-full border border-gray-300 rounded p-2">
-            <option>Men</option>
-            <option>Women</option>
-            <option>Kids</option>
+          <select 
+            className="w-full border border-gray-300 rounded p-2"
+            value={category}
+            onChange={handleCategoryChange}
+          >
+            <option value="">Select category</option>
+            {Object.keys(categories).map((cat) => (
+              <option key={cat} value={cat}>{cat}</option>
+            ))}
           </select>
         </div>
         <div className="w-full sm:w-1/3 mb-4 sm:mb-0 sm:px-1">
           <label className="block mb-2">Sub category</label>
-          <select className="w-full border border-gray-300 rounded p-2">
-            <option>Topwear</option>
-            <option>Bottomwear</option>
+          <select 
+            className="w-full border border-gray-300 rounded p-2"
+            value={subCategory}
+            onChange={(e) => setSubCategory(e.target.value)}
+            disabled={!category}
+          >
+            <option value="">Select sub-category</option>
+            {category && categories[category].map((subCat) => (
+              <optgroup key={subCat} label={subCat}>
+                {subCategories[subCat].map((item) => (
+                  <option key={item} value={item}>{item}</option>
+                ))}
+              </optgroup>
+            ))}
           </select>
         </div>
         <div className="w-full sm:w-1/3 sm:pl-2">
           <label className="block mb-2">Product Price</label>
-          <input type="text" defaultValue="25" className="w-full border border-gray-300 rounded p-2" />
+          <input type="text" defaultValue="200" className="w-full border border-gray-300 rounded p-2" />
         </div>
       </div>
       <div className="mb-4">
         <label className="block mb-2">Product Sizes</label>
         <div className="flex flex-wrap">
-          {['S', 'M', 'L', 'XL', 'XXL'].map((size) => (
-            <div key={size} className="mr-2 mb-2 px-3 py-1 bg-gray-100 rounded">{size}</div>
+          {sizes.map((size) => (
+            <button
+              key={size}
+              onClick={() => handleSizeToggle(size)}
+              className={`mr-2 mb-2 px-3 py-1 rounded ${
+                selectedSizes.includes(size)
+                  ? 'bg-pink-500 text-white'
+                  : 'bg-gray-200 text-gray-700'
+              }`}
+            >
+              {size}
+            </button>
           ))}
         </div>
       </div>
@@ -105,7 +165,7 @@ const AddItemComponent = () => {
   );
 };
 
-// ListItemComponent
+// ListItemComponent (unchanged)
 const ListItemComponent = () => (
   <div className="p-4 md:p-6">
     <h2 className="text-xl mb-4">All Products List</h2>
@@ -140,7 +200,7 @@ const ListItemComponent = () => (
   </div>
 );
 
-// OrderItem Component
+// OrderItem Component (unchanged)
 const OrderItem = ({ product, customer, address, items, price, method, payment, date }) => (
   <div className="border border-gray-300 rounded-lg p-4 md:p-6 mb-4">
     <div className="flex flex-col md:flex-row items-start">
@@ -172,7 +232,7 @@ const OrderItem = ({ product, customer, address, items, price, method, payment, 
   </div>
 );
 
-// OrdersComponent
+// OrdersComponent (unchanged)
 const OrdersComponent = () => (
   <div className="p-4 md:p-6">
     <h2 className="text-xl font-semibold mb-4">Order Page</h2>
@@ -199,7 +259,7 @@ const OrdersComponent = () => (
   </div>
 );
 
-// Main AdminPanel Component
+// Main AdminPanel Component (unchanged)
 const AdminPanel = () => {
   const navigate = useNavigate();
   const [activeMenu, setActiveMenu] = useState('');
@@ -276,7 +336,6 @@ const AdminPanel = () => {
       </div>
     </div>
   );
-
 };
 
 export default AdminPanel;

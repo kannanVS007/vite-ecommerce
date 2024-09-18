@@ -14,11 +14,11 @@ const LatestCollection = () => {
     }, [products]); // Dependency array should include `products`
 
     return (
-        <div className="my_10">
+        <div className="my_10 ">
             <div className="text-center py-8 text-3xl">
                 <Title text1={'LATEST'} text2={'COLLECTIONS'} />
                 <p className="w-3/4 m-auto text-xs sm:text-sm md:text-base text-gray-600">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Id facilis debitis magnam perferendis 
+                Discover our latest collection of premium products, carefully selected to offer the best in quality and style. Shop now and elevate your shopping experience with exclusive deals.
                 </p>
             </div>
 

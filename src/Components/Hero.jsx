@@ -9,10 +9,10 @@ const Hero = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const images = [ // This is a placeholder for the woman in the red dress image
-    assets.home_page,
-    assets.home_page1,
-    assets.home_page2,
-    assets.home_page5,
+    assets.hero_img,
+    assets.her_img1,
+    assets.hero_img1,
+  
    
   ];
 
